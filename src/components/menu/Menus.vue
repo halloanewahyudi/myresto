@@ -4,7 +4,7 @@
             <menu-item v-for="(menu, index) in store.products" :key="menu"
                 :image="menu._embedded['wp:featuredmedia'][0].source_url" :title="menu.title.rendered"
                 :price="menu.acf.price">
-                <button @click="store.getprice(index) && counter.tambah">add</button>
+                <button @click="store.getprice(index) && counter.tambah" class="py-1 px-3 bg-slate-700 text-slate-100 hover:bg-slate-800 rounded-lg">add</button>
             </menu-item>
         </div>
     </div>
