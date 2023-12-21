@@ -1,12 +1,9 @@
 <script setup>
-import ListMenu from '../components/menu/ListMenu.vue';
-import MenusVue from '../components/menu/Menus.vue';
-
+import ListMenuVue from '../components/ListMenu.vue';
 </script>
 
 <template>
   <main>
-<MenusVue />
-
+<ListMenuVue/>
   </main>
 </template>

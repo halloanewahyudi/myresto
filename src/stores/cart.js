@@ -1,35 +1,59 @@
-import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, computed } from 'vue'
+import { defineStore } from 'pinia'
 
-export const mycart = defineStore('cart', () => {
-   const items = ref([]);
-   const totalItems = ref(0);
-   const totalCost = ref(0);
+export const useCartStore = defineStore('cart', () => {
+    const list = ref([])
+    const price = ref()
+    const amount = ref()
+    const tambahKeranjang = ref(0)
+    const aktif = ref(false)
+    const getId = ref(0)
 
-   const addItem = (item, price) => {
-      let targetItem = items.value.filter(currItem => currItem.id === item.id)[0];
+    function tambahItem(item) {
 
-      if (targetItem) targetItem.count += 1;
-      else items.value = [...items.value, { ...item, count: 1 }];
+        if (!list.value.find(selectedItem => selectedItem.id === item.id)) {
+            // mebuat list add menu
+            list.value = [...list.value, item]
 
-      totalItems.value += 1;
-      totalCost.value += price;
-   };
+            //  mengambi price dari list menu
+            price.value = list.value.map(item => parseInt(item.acf.price, 10));
 
-   const removeItem = (item) => {
-      let targetItem = items.value.filter(currItem => currItem.id === item.id)[0];
+            // mulai menhitung jumlah price
+            amount.value = price.value.reduce((total, harga) => total + harga, 0);
+     
+            // itung di kranjang
+            tambahKeranjang.value++
 
-      if (targetItem.count === 1) items.value = items.value.filter(currItem => currItem.id !== item.id);
-      else targetItem.count -= 1;
+        } else {
+            console.log('sudah ada')
+        }
 
-      totalItems.value -= 1;
-      totalCost.value -= item.price;
-   };
-   return {
-      items,
-      addItem,
-      removeItem,
-      totalItems,
-      totalCost
-   }
+    }
+
+    function deleteItem(id) {
+        const index = list.value.findIndex(item => item.id === id)
+        if (index !== -1) {
+           // menhhapus price
+            price.value.splice(index,1)
+    
+            // mendelete list
+            list.value.splice(index, 1)
+            // mengurangi jumlah/ total harga apabila list sudah di delete
+            amount.value = price.value.reduce((total, harga) => total + harga, 0);
+       
+            // kurang di keranjang
+            tambahKeranjang.value--
+        }
+    }
+
+    return{
+        list,
+        price,
+        amount,
+        tambahKeranjang,
+        aktif,
+        getId,
+        tambahItem,
+        deleteItem
+    }
 })

@@ -1,12 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import { useCounterStore } from './stores/counter';
-import { useStore } from './stores';
-import iconCart from './components/icons/IconCart.vue'
-const counter = useCounterStore();
-const store = useStore()
-
+import { useCartStore } from './stores/cart';
+const cart = useCartStore()
 </script>
 
 <template>
@@ -21,8 +16,10 @@ const store = useStore()
         <router-link to="/about" >About</router-link>
       </div> -->
       <router-link to="/checkout" class="relative w-max h-max">
-        <iconCart class="scale-110" />
-         <span class="absolute -top-2 right-2 bg-red-600 text-white w-5 h-5 rounded-full flex justify-center items-center"> {{ store.jumlah }}</span> 
+        <i class="bi bi-basket2 text-xl"></i>
+         <span class="absolute -top-2 right-2 bg-red-600 text-white w-5 h-5 rounded-full flex justify-center items-center">
+          {{ cart.tambahKeranjang }}
+         </span> 
         </router-link>
     </div>
   </header>
