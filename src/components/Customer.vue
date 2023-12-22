@@ -37,6 +37,10 @@ const router = useRouter()
       }).json();
 
       post.value = data;
+      customer.nama = field.value.nama
+    customer.hp = field.value.hp
+    customer.meja = field.value.meja
+      router.push({path:'/thanks', name:'thanks'})
     });
  // myresto
  /// dGi9 FQGJ ta1a uHGf HRrZ CIEC
