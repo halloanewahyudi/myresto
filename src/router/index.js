@@ -3,6 +3,10 @@ import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
+  },
   routes: [
     {
       path: '/',
@@ -21,6 +25,16 @@ const router = createRouter({
       path: '/checkout',
       name: 'checkout',
       component: () => import('../views/Checkout.vue')
+    },
+    {
+      path: '/customer',
+      name: 'customer',
+      component: () => import('../views/CustomerView.vue')
+    },
+    {
+      path: '/thanks',
+      name: 'thanks',
+      component: () => import('../views/ThanksView.vue')
     }
   ]
 })

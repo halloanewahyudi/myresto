@@ -3,11 +3,14 @@ import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', () => {
     const list = ref([])
-    const price = ref()
+    const price = ref(0)
     const amount = ref()
     const tambahKeranjang = ref(0)
     const aktif = ref(false)
     const getId = ref(0)
+
+    const tampungOrder = ref({})
+
 
     function tambahItem(item) {
 
@@ -16,8 +19,9 @@ export const useCartStore = defineStore('cart', () => {
             list.value = [...list.value, item]
 
             //  mengambi price dari list menu
-            price.value = list.value.map(item => parseInt(item.acf.price, 10));
-
+            // const defaultPrice = 
+            price.value = list.value.map(item => parseInt(item.acf.price, 10)); 
+           
             // mulai menhitung jumlah price
             amount.value = price.value.reduce((total, harga) => total + harga, 0);
      
@@ -53,6 +57,7 @@ export const useCartStore = defineStore('cart', () => {
         tambahKeranjang,
         aktif,
         getId,
+        tampungOrder,
         tambahItem,
         deleteItem
     }

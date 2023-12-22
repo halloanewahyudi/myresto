@@ -1,4 +1,7 @@
 <script setup>
+import { computed, ref, watchEffect } from "vue"
+import { useCartStore } from "../../stores/cart"
+const cart = useCartStore()
 const props = defineProps({
     id:{
         type:Number,
@@ -27,20 +30,21 @@ const props = defineProps({
         default:1,
     }
 })
+
 </script>
 <template>
-    <div>
-        <div :id="props.id" class="flex justify-between items-center  p-3 gap-2 bg-white hover:shadow-2xl active:shadow-none duration-200 rounded-lg">
+    <div class="bg-white hover:shadow-2xl active:shadow-none duration-200 rounded-lg p-3 flex flex-col gap-3">
+        <div :id="props.id" class="flex flex-wrap w-full justify-between items-center gap-2 cursor-pointer" @click="open =! open">
        <div class="flex gap-2 justify-start items-center">
-        <div class="w-24 rounded overflow-hidden">
+        <div class="w-24 rounded overflow-hidden shrink-0">
             <img :src="props.image" alt="" srcset="" class=" rounded">
         </div>
         <span class="text-base">{{ props.title }}</span>
       
        </div>
-       <div class="flex items-center gap-3">
-        <span class="font-semibold">{{ props.price }}</span>
-          <slot />
+       <div class="flex items-center gap-3 justify-between w-max">
+        <span class="font-semibold ml-auto">{{ props.price }}</span>
+        <slot />
        </div>
     </div>
     </div>
