@@ -10,7 +10,6 @@ const cart =  useCartStore()
             <h4 class="text-xl">Terimakasih {{ customer.nama }} </h4>
             <p> Pesanan anda pada meja <strong>  {{ customer.meja }} </strong></p>
             <p>Silakan melakukan pembayaran</p>
-            {{ cart.$state }} <br>
-            {{ customer.$state }}
+          
         </div>
 </template>
