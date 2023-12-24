@@ -34,6 +34,10 @@ export const useCartStore = defineStore('cart',()=>{
         }
     }
 
+    function resetCount(){
+        cartCount.value = 0
+    }
+
     const rupiah = (number)=>{
         return new Intl.NumberFormat("id-ID", {
           style: "currency",
@@ -48,6 +52,7 @@ export const useCartStore = defineStore('cart',()=>{
         order,
         deleteMenu,
         cartCount,
-        rupiah
+        rupiah,
+        resetCount
     }
 })

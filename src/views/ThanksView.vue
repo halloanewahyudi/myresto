@@ -1,7 +1,19 @@
 <script setup>
+import { onMounted } from 'vue';
+import { useCartStore } from '../stores/cart';
 import { useCustomerStore } from '../stores/customer';
-
+const cart =  useCartStore()
 const cust = useCustomerStore()
+
+function reset(){
+    setTimeout(() => {
+     return  cart.resetCount
+    }, 1000);
+}
+onMounted(()=>{
+   reset()
+})
+
 </script>
 <template>
     <div class="text-center flex flex-col items-center justify-center min-h-[80vh] px-6 lg:px-10">
