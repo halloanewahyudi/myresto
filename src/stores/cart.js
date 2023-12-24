@@ -27,11 +27,19 @@ export const useCartStore = defineStore('cart',()=>{
            // menhhapus price
             // mendelete list
             listMenu.value.splice(index, 1)
+            cartCount.value++
             // mengurangi jumlah/ total harga apabila list sudah di delete
             // kurang di keranjang
            // tambahKeranjang.value--
         }
     }
+
+    const rupiah = (number)=>{
+        return new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR"
+        }).format(number);
+      }
 
     return {
         listMenu,
@@ -39,6 +47,7 @@ export const useCartStore = defineStore('cart',()=>{
         total,
         order,
         deleteMenu,
-        cartCount
+        cartCount,
+        rupiah
     }
 })

@@ -6,4 +6,9 @@
     body{
         @apply bg-slate-100 text-slate-700 pt-12;
     }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 }

@@ -43,14 +43,14 @@ onMounted(()=>{
                     <img :src="props.gambar" alt="" class="w-24 h-auto rounded-lg shrink-0">
                     <span class="font-semibold"> {{ props.nama }}</span>
                 </span>
-                <span>Price {{ props.harga }}</span>
+                <span>Price {{ cart.rupiah( props.harga)  }}</span>
             </div>
             <div v-if="open" class="flex flex-col gap-3">
                 <div class="flex gap-3 justify-between items-center py-5">
                     <span>
                         <span>Qty</span> <input type="number" v-model="qty" class="border w-20">
                     </span>
-                    {{ jumlah }}
+                    {{ cart.rupiah(jumlah)}}
                 </div>
                 <button class="bg-slate-700 text-white hover:bg-slate-800 rounded-lg duration-200 py-1 px-3" @click="cart.order(getdata)">Order</button>
             </div>
