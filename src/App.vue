@@ -12,7 +12,7 @@ const cart = useCartStore()
       <nav class="flex gap-3 items-center">
         <RouterLink to="/">Food</RouterLink>
         <RouterLink to="/">Drink</RouterLink>
-        <RouterLink to="/about" class=" p-1 px-3 rounded-full bg-red-600 text-white">
+        <RouterLink to="/cart" class=" p-1 px-3 rounded-full bg-red-600 text-white">
           <i class="bi bi-basket2"></i> {{ cart.cartCount }}
         </RouterLink>
       </nav>

@@ -27,7 +27,7 @@ export const useCartStore = defineStore('cart',()=>{
            // menhhapus price
             // mendelete list
             listMenu.value.splice(index, 1)
-            cartCount.value++
+            cartCount.value--
             // mengurangi jumlah/ total harga apabila list sudah di delete
             // kurang di keranjang
            // tambahKeranjang.value--

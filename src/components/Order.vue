@@ -11,8 +11,8 @@ const cart = useCartStore()
                         {{ index + 1 }}
                     </div>
                 </div>
-                <div class="flex flex-col gap-2">
-                    <div class="flex"> {{ item.nama }} </div>
+                <div class="flex flex-col gap-3">
+                    <div class="flex gap-3 items-center justify-between"> {{ item.nama }} <button @click="cart.deleteMenu(item)"> <i class="bi bi-x-circle"></i></button> </div>
                     <div class="flex gap-3 items-center justify-between">
                         <span class="">Harga {{ cart.rupiah(item.harga)}}</span>
                         <span>Qty {{ item.banyaknya }}</span>
@@ -24,8 +24,8 @@ const cart = useCartStore()
         <div class="text-center py-4">
             <span class="text-xl text-green-700"> Total: {{ cart.rupiah(cart.total )}}</span>
         </div>
-        <button class="py-2 px-4 bg-slate-700 text-white rounded-lg hover:bg-slate-800 duration-200">
-                Order
+        <button @click="$router.push('/customer')" class="py-2 px-4 bg-slate-700 text-white rounded-lg hover:bg-slate-800 duration-200">
+            Order
       </button>
     </div>
 </template>

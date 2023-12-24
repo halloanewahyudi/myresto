@@ -4,11 +4,21 @@
 
 @layer base {
     body{
-        @apply bg-slate-100 text-slate-700 pt-12;
+        @apply bg-slate-100 text-slate-700 pt-20;
     }
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="mail"],
+    input[type="tel"],
+    textarea {
+    @apply p-1 rounded-lg border;
+
+    } 
+
 }
