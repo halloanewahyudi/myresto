@@ -6,11 +6,12 @@ import { useCartStore } from '../stores/cart';
 import Loading from './icons/Loading.vue';
 const cart = useCartStore()
 const url = 'https://resto.ardanadutaperkasa.com/wp/wp-json/wp/v2/menu/?_embed';
-const { isFetch, data } = useFetch(url).get().json()
+const { isFetching,isFinished,error, data } = useFetch(url).get().json()
 
 </script>
 <template>
-    <div v-if="isFetch" class="flex flex-col justify-center items-center min-h-[80vh]">
+
+    <div v-if="isFetching" class="flex flex-col justify-center text-center  items-center min-h-[80vh]">
         <Loading />
     </div>
     <div v-else class="p-6 flex flex-col gap-4">

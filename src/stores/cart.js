@@ -45,6 +45,10 @@ export const useCartStore = defineStore('cart',()=>{
         }).format(number);
       }
 
+  const getDataOrder = ref([
+   listMenu.value,
+   total.value
+  ])
     return {
         listMenu,
         itemMenu,
@@ -53,6 +57,7 @@ export const useCartStore = defineStore('cart',()=>{
         deleteMenu,
         cartCount,
         rupiah,
-        resetCount
+        resetCount,
+        getDataOrder
     }
 })
