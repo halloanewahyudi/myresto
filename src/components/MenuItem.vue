@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref, watch } from "vue"
+import { computed, onMounted, ref, watch, watchEffect } from "vue"
 import  {useCartStore} from '../stores/cart'
 const cart = useCartStore()
 const qty = ref(1)
@@ -10,13 +10,14 @@ const props = defineProps({
     gambar: String,
     harga: Number,
 })
-const status = ref(false)
 
 watch(qty,(newQty, oldQty )=>{
      jumlah.value = newQty * props.harga
    // console.log(newQty)
 })
+
 const open = ref(false)
+const listItem = ref(false)
 const getdata = computed(()=>{
     const dataMenu = {
         id:props.id,
@@ -26,6 +27,13 @@ const getdata = computed(()=>{
         jumlah:jumlah.value,
     }
   cart.itemMenu = dataMenu
+  // manyamakan nilai list item
+  cart.listItem = listItem.value
+
+  setTimeout(() => {
+    open.value = false
+    listItem.value = true
+  }, 500);
    return  dataMenu
 })
 
@@ -33,11 +41,12 @@ onMounted(()=>{
     if(jumlah.value == null){
         jumlah.value = props.harga
     }
+
 })
 </script>
 <template>
     <div>
-        <div class="p-4 border bg-white rounded-lg hover:shadow-xl duration-200 flex-col gap-5 divide-y">
+        <div :data-item="listItem" :id="'item-'+props.id" class="p-4 border bg-white rounded-lg hover:shadow-xl duration-200 flex-col gap-5 divide-y">
             <div class="flex flex-wrap gap-3 items-center justify-between" @click="open = !open">
                 <span class="flex gap-3 items-center">
                     <img :src="props.gambar" alt="" class="w-24 h-auto rounded-lg shrink-0">
@@ -45,14 +54,14 @@ onMounted(()=>{
                 </span>
                 <span>Price {{ cart.rupiah( props.harga)  }}</span>
             </div>
-            <div v-if="open" class="flex flex-col gap-3">
+            <div v-if="open" class="item-bawah  flex-col gap-3 ">
                 <div class="flex gap-3 justify-between items-center py-5">
                     <span>
                         <span>Qty</span> <input type="number" v-model="qty" class="border w-20">
                     </span>
                     {{ cart.rupiah(jumlah)}}
                 </div>
-                <button class="bg-slate-700 text-white hover:bg-slate-800 rounded-lg duration-200 py-1 px-3" @click="cart.order(getdata)">Order</button>
+                <button :id="'btn'+props.id" class="bg-slate-700 text-white hover:bg-slate-800 rounded-lg duration-200 py-1 px-3" @click.prevent="cart.order(getdata)">Order</button>
             </div>
         </div>
     </div>

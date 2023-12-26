@@ -1,18 +1,28 @@
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
 import { defineStore } from "pinia";
+
 
 export const useCartStore = defineStore('cart',()=>{
 
     // menampung list order
   const  listMenu = ref([])
   const itemMenu = ref({})
-
   const cartCount = ref(0)
+
+
+  // sebagai penanda list ite,
+  const listItem = ref(false)
 
     function order(item){
         if (!listMenu.value.find(selectedItem => selectedItem.id === item.id)) {
             listMenu.value = [...listMenu.value , item ]
             cartCount.value++
+            console.log(listMenu.value.length)
+            const getid = document.getElementById('item-'+item.id)
+             if(getid){
+               getid.classList.add('bg-slate-200')
+             }
+           console.log(getid)
         }
     }
 
@@ -58,6 +68,6 @@ export const useCartStore = defineStore('cart',()=>{
         cartCount,
         rupiah,
         resetCount,
-        getDataOrder
+        listItem
     }
 })

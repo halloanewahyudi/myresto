@@ -10,7 +10,7 @@ const cart = useCartStore()
 const cust = useCustomerStore()
 const url = ref('https://resto.ardanadutaperkasa.com/wp/wp-json/wp/v2/customer')
 const getOrder = ref(JSON.stringify(cart.listMenu))
-const getData = reactive({
+const getData = {
     title:'',
     acf:{
         hp:'',
@@ -20,7 +20,7 @@ const getData = reactive({
         total: cart.total
     },
     status:'publish'
-})
+}
 const postData = ()=>{
     const username = 'admin'; 
     const applicationPassword = 'sUHR MncK OFq7 NkgX B4Nw m3rA';
@@ -33,12 +33,13 @@ const postData = ()=>{
    })
    .then((res)=>{
       console.log(res)
-      getData.title = cust.customer.nama
-      getData.acf.meja = cust.customer.meja
+      cust.nama = getData.title
+      cust.hp = getData.acf.hp 
+      cust.meja = getData.acf.meja
       setTimeout(() => {
         rounter.push('/thanks')
         cart.resetCount
-      }, 3000);
+      }, 500);
    })
    .catch(console.error())
 }

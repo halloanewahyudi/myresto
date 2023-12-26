@@ -2,13 +2,12 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 
 export const useCustomerStore = defineStore('customer-store',()=>{
-    const customer = ref({
-        nama:'',
-        phone:'',
-        meja:''
-    })
-
+   const nama = ref('')
+   const hp = ref('')
+  const meja = ref('')
     return{
-        customer
+        nama,
+        hp,
+        meja
     }
 })
