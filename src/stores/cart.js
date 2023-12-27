@@ -46,10 +46,6 @@ export const useCartStore = defineStore('cart',()=>{
     
     }
 
-  const getDataOrder = ref([
-   listMenu.value,
-   total.value
-  ])
 
     return {
         listMenu,

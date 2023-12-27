@@ -5,7 +5,11 @@ import { useCustomerStore } from '../stores/customer';
 const cust = useCustomerStore()
 const cart = useCartStore()
 
-
+onMounted(()=>{
+    setTimeout(() => {
+        cart.listMenu = []
+    }, 1000);
+})
 </script>
 <template>
     
