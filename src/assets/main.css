@@ -17,7 +17,7 @@
     input[type="mail"],
     input[type="tel"],
     textarea {
-    @apply p-1 rounded-lg border w-full;
+    @apply p-1 rounded-lg border;
 
     } 
 

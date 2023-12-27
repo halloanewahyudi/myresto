@@ -1,5 +1,7 @@
 <script setup>
 import Customer from '../components/Customer.vue';
+import { useCartStore } from '../stores/cart';
+ const cart = useCartStore()
 </script>
 <template>
     <div class="px-4 max-w-md mx-auto">

@@ -7,22 +7,15 @@ export const useCartStore = defineStore('cart',()=>{
     // menampung list order
   const  listMenu = ref([])
   const itemMenu = ref({})
-  const cartCount = ref(0)
-
 
   // sebagai penanda list ite,
-  const listItem = ref(false)
+  const listItem = ref(null)
 
     function order(item){
         if (!listMenu.value.find(selectedItem => selectedItem.id === item.id)) {
             listMenu.value = [...listMenu.value , item ]
-            cartCount.value++
+            listItem.value = item
             console.log(listMenu.value.length)
-            const getid = document.getElementById('item-'+item.id)
-             if(getid){
-               getid.classList.add('bg-slate-200')
-             }
-           console.log(getid)
         }
     }
 
@@ -37,15 +30,8 @@ export const useCartStore = defineStore('cart',()=>{
            // menhhapus price
             // mendelete list
             listMenu.value.splice(index, 1)
-            cartCount.value--
-            // mengurangi jumlah/ total harga apabila list sudah di delete
-            // kurang di keranjang
-           // tambahKeranjang.value--
-        }
-    }
 
-    function resetCount(){
-        cartCount.value = 0
+        }
     }
 
     const rupiah = (number)=>{
@@ -55,19 +41,24 @@ export const useCartStore = defineStore('cart',()=>{
         }).format(number);
       }
 
+    const resetListMenu = () =>{
+      listMenu.value.splice(0, listMenu.value.length)
+    
+    }
+
   const getDataOrder = ref([
    listMenu.value,
    total.value
   ])
+
     return {
         listMenu,
         itemMenu,
         total,
         order,
         deleteMenu,
-        cartCount,
         rupiah,
-        resetCount,
-        listItem
+        listItem,
+        resetListMenu
     }
 })

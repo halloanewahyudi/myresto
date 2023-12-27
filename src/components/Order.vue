@@ -1,17 +1,14 @@
 <script setup>
+import { onMounted } from "vue";
 import { useCartStore } from "../stores/cart";
 const cart = useCartStore()
-
-const order = () => {
-    const dataOrder = {
-        order:cart.listMenu,
-        total:cart.total
-    }
-} 
+onMounted(()=>{
+    cart.listItem = true
+})
 </script>
 <template>
     <div  class="flex flex-col gap-5 divide-y p-4 bg-white rounded-lg">
-        <div :data-id="'item-'+item.id"  class="flex flex-col text-sm" v-for="(item, index) in cart.listMenu" :key="item.id">
+        <div :data-status="cart.listItem" :data-id="'item-'+item.id"  class="flex flex-col text-sm" v-for="(item, index) in cart.listMenu" :key="item.id">
             <div class="flex gap-2">
                 <div class="shrink-0 ">
                     <div class="w-5 h-5 rounded-full flex items-center justify-center bg-slate-700 text-white">
