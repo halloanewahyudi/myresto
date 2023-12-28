@@ -1,11 +1,11 @@
 <script setup>
-//import { useFetch } from '@vueuse/core';
+import { useFetch } from '@vueuse/core';
 import { onMounted, ref } from 'vue';
 import MenuItem from './MenuItem.vue';
-//import { useCartStore } from '../stores/cart';
+import { useCartStore } from '../stores/cart';
 import Loading from './icons/Loading.vue';
 const cart = useCartStore()
-const url = 'https://resto.ardanadutaperkasa.com/wp/wp-json/wp/v2/menu/?_embed';
+const url = 'https://resto.ardanadutaperkasa.com/wp/wp-json/wp/v2/menu/?categories=2&_embed';
 const { isFetching,isFinished,error, data } = useFetch(url).get().json()
 
 </script>
