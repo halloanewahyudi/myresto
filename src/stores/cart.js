@@ -1,5 +1,6 @@
 import { ref, computed, reactive } from "vue";
 import { defineStore } from "pinia";
+import { useArrayMap } from "@vueuse/core";
 
 
 export const useCartStore = defineStore('cart',()=>{
@@ -9,19 +10,33 @@ export const useCartStore = defineStore('cart',()=>{
   const itemMenu = ref({})
 
   // sebagai penanda list ite,
-  const listItem = ref(null)
+  const listItem = ref([])
 
     function order(item){
         if (!listMenu.value.find(selectedItem => selectedItem.id === item.id)) {
             listMenu.value = [...listMenu.value , item ]
-            listItem.value = item
-            console.log(listMenu.value.length)
+           
+            const getId = document.getElementById('item-'+item.id)
+            if(getId){
+              const bg =  getId.classList.add('bg-slate-200')
+              listItem.value = [...listItem.value, bg]
+            }
+
         }
     }
 
     const total = computed(() => {
         return listMenu.value.reduce((acc, item) => acc + item.jumlah, 0);
       })
+
+    const keranjang = computed(()=>{
+        if(listItem.value.length){
+            document.getElementById('keranjang').classList.add('tambah-keranjang')
+            setTimeout(() => {
+            document.getElementById('keranjang').classList.remove('tambah-keranjang')
+            }, 500);
+        }
+    })
 
 
       function deleteMenu(item){
@@ -55,6 +70,7 @@ export const useCartStore = defineStore('cart',()=>{
         deleteMenu,
         rupiah,
         listItem,
-        resetListMenu
+        resetListMenu,
+        keranjang
     }
 })

@@ -17,7 +17,6 @@ watch(qty,(newQty, oldQty )=>{
 })
 
 const open = ref(false)
-
 const getdata = computed(()=>{
     const dataMenu = {
         id:props.id,
@@ -28,10 +27,6 @@ const getdata = computed(()=>{
     }
   cart.itemMenu = dataMenu
   // manyamakan nilai list item
-
-  setTimeout(() => {
-    open.value = false
-  }, 500);
    return  dataMenu
 })
 
@@ -43,6 +38,7 @@ onMounted(()=>{
 </script>
 <template>
     <div>
+
         <div :id="'item-'+props.id" class="p-4 border bg-white rounded-lg hover:shadow-xl duration-200 flex-col gap-5 divide-y">
             <div class="flex flex-wrap gap-3 items-center justify-between" @click="open = !open">
                 <span class="flex gap-3 items-center">

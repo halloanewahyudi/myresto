@@ -8,8 +8,6 @@ const cart = useCartStore()
 const url = 'https://resto.ardanadutaperkasa.com/wp/wp-json/wp/v2/menu/?_embed';
 const { isFetching,isFinished,error, data } = useFetch(url).get().json()
 
-const status = ref(null)
-
 </script>
 <template>
 
@@ -17,13 +15,12 @@ const status = ref(null)
         <Loading />
     </div>
     <div v-else class="p-6 flex flex-col gap-4">
-       
-        <menu-item v-for="(item,index) in data" :key="index" 
+        <menu-item  v-for="(item,index) in data" :key="index" 
         :id="item.id" 
-        :data-status="item.listItem"
         :nama="item.title.rendered"
-        :gambar="item._embedded['wp:featuredmedia'][0].source_url" :harga="item.acf.price">
-            {{ cart.itemMenu }}
+        :gambar="item._embedded['wp:featuredmedia'][0].source_url" 
+        :harga="item.acf.price">
+        {{ cart.itemMenu }}
         </menu-item>
     </div>
 </template>
