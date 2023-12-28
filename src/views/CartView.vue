@@ -1,11 +1,21 @@
 
 <script setup>
 // import OrderVue from '../components/Order.vue';
-import { computed, onMounted, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import ListOrder from '../components/ListOrder.vue';
 import { useCartStore } from '../stores/cart';
+const router = useRouter()
 const cart = useCartStore()
-
+const orderDulu = ref(false)
+const clikOrder = ()=>{
+  if(cart.total != 0){
+    router.push('/customer')
+  }else{
+    orderDulu.value = true
+  }
+  
+}
 </script>
 <template>
   <div class="px-4 flex flex-col items-center gap-4 py-10">
@@ -17,7 +27,10 @@ const cart = useCartStore()
     </list-order>
     <div class="flex flex-col gap-4">
       <h4 class="text-xl text-green-600">total: {{ cart.rupiah(cart.total) }}</h4>
-      <button @click="$router.push('/customer')"
+
+      <span class="py-5 animate-bounce duration-0 text-red-500" v-if="orderDulu"> Silakan order dulu</span>
+
+      <button id="btnOrder"  @click="clikOrder"
         class="py-2 px-4 rounded-lg bg-slate-700 text-slate-200 hover:bg-slate-800 duration-200">Order</button>
     </div>
     <button @click="$router.push('/')"> Back to Menu</button>
