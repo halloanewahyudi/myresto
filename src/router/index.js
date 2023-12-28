@@ -30,18 +30,23 @@ const router = createRouter({
       component: () => import('../views/CustomerView.vue')
     },
     {
+      path: '/qris',
+      name: 'qris',
+      component: () => import('../views/QrisView.vue')
+    },
+    {
       path: '/thanks',
       name: 'thanks',
       component: () => import('../views/ThanksView.vue')
     },
     {
-      path: '/test',
-      name: 'test',
-      component: () => import('../views/TestForm.vue')
+      path: '/admin/kitchen',
+      name: 'kitchen',
+      component: () => import('../views/admin/Kitchen.vue')
     },
     {
-      path: '/admin',
-      name: 'admin',
+      path: '/admin/orders',
+      name: 'orders',
       component: () => import('../views/admin/Orders.vue')
     }
     

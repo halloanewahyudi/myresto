@@ -26,6 +26,6 @@ const edit = ref(false)
            <slot v-if="edit" />
             <span v-else>{{ props.banyaknya }} </span>
         </span>  
-        <span> Jumlah: {{ props.jumlah }}</span>
+        <span> {{ props.jumlah }}</span>
     </div>
 </template>

@@ -45,7 +45,7 @@ onMounted(()=>{
                     <img :src="props.gambar" alt="" class="w-24 h-auto rounded-lg shrink-0">
                     <span class="font-semibold"> {{ props.nama }}</span>
                 </span>
-                <span>Price {{ cart.rupiah( props.harga)  }}</span>
+                <span><i class="bi bi-tag-fill"></i> {{ cart.rupiah( props.harga)  }}</span>
             </div>
             <div v-if="open" class="item-bawah  flex-col gap-3 ">
                 <div class="flex gap-3 justify-between items-center py-5">

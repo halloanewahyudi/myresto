@@ -37,6 +37,15 @@ export const useCartStore = defineStore('cart',()=>{
             }, 500);
         }
     })
+    const persen = computed(()=>{
+       const jumlah = ( total.value / 10 ) *100
+       return jumlah
+    })
+
+    const grandTotal = computed(()=>{
+      const gt = total.value + persen.value
+      return gt
+   })
 
 
       function deleteMenu(item){
@@ -60,8 +69,6 @@ export const useCartStore = defineStore('cart',()=>{
       listMenu.value.splice(0, listMenu.value.length)
     
     }
-
-
     return {
         listMenu,
         itemMenu,
@@ -71,6 +78,8 @@ export const useCartStore = defineStore('cart',()=>{
         rupiah,
         listItem,
         resetListMenu,
-        keranjang
+        keranjang,
+        persen,
+        grandTotal
     }
 })

@@ -23,7 +23,7 @@ watchEffect(()=>{
   <header v-if="navbar"  class="fixed top-0 left-0 w-full min-h-max py-3 px-4 lg:px-10 bg-slate-700 text-white ">
     <div class="wrapper flex gap-4 items-center justify-between">
       <router-link to="/" class="text-xl font-semibold">
-        MY RESTO
+       <img src="./assets/logo.png" alt="" class="w-12 h-12">
       </router-link>
       <nav class="flex gap-3 items-center">
         <RouterLink to="/food" class="flex gap-2 py-1 px-2 items-center rounded-lg bg-slate-800"> <FoodVue/> F </RouterLink>

@@ -4,7 +4,9 @@ import { useRouter } from 'vue-router'
 import { useCartStore } from '../stores/cart'
 import { useCustomerStore } from '../stores/customer'
 import axios from 'axios';
+import LoadingVue from './icons/Loading.vue';
 
+const load = ref(false)
 const rounter = useRouter()
 const cart = useCartStore()
 const cust = useCustomerStore()
@@ -37,8 +39,9 @@ const postData = ()=>{
       cust.hp = getData.acf.hp 
       cust.meja = getData.acf.meja
       setTimeout(() => {
-        rounter.push('/thanks')
+        rounter.push('/qris')
         cart.resetCount
+        load.value = true
       }, 500);
    })
    .catch(console.error())
@@ -46,8 +49,12 @@ const postData = ()=>{
 </script>
 
 <template>
-  <div>
-    <form @submit.prevent="postData" class="flex flex-col gap-4">
+   <div v-if="load" class="flex flex-col justify-center text-center  items-center min-h-[80vh]">
+        <LoadingVue />
+    </div>
+  <div class="p-8 flex flex-col min-h-[80vh] justify-center items-center">
+    <h4 class="text-center mb-5">Silakan isi data anda </h4>
+    <form @submit.prevent="postData" class=" flex flex-col gap-4 bg-white rounded-lg p-5 w-full">
       <div class="flex flex-col gap-3">
         <label for="nama">Nama</label>
         <input type="text" v-model="getData.title">
@@ -60,7 +67,7 @@ const postData = ()=>{
         <label for="nama">Meja</label>
         <input type="number" v-model="getData.acf.meja" required>
       </div>
-      <button type="submit" class="py-2 px-4 rounded-lg bg-slate-700 text-white hover:bg-slate-800;">
+      <button type="submit" class="mt-4 py-2 px-4 rounded-lg bg-slate-700 text-white hover:bg-slate-800;">
         Submit
       </button>
     </form>
