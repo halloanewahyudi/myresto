@@ -40,21 +40,16 @@ const router = createRouter({
       component: () => import('../views/ThanksView.vue')
     },
     {
-      path: '/admin',
-      name: 'admin',
-      children: [
-        {
-          path: 'kitchen',
-          name: 'kitchen',
-          component: () => import('../views/admin/Kitchen.vue')
-        },
-        {
-          path: 'orders',
-          name: 'orders',
-          component: () => import('../views/admin/Orders.vue')
-        }
-      ]
+      path: '/kitchen',
+      name: 'kitchen',
+      component: () => import('../views/KitchenView.vue')
     },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: () => import('../views/OrdersView.vue')
+    }
+
   ]
 
 })

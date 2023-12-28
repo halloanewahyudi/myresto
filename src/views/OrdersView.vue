@@ -1,7 +1,7 @@
 <script setup>
 import { useFetch } from "@vueuse/core";
 import { computed, onMounted, ref } from "vue";
-import LoadingVue from "../../components/icons/Loading.vue";
+import LoadingVue from "../components/icons/Loading.vue";
 
 const url = 'https://resto.ardanadutaperkasa.com/wp/wp-json/wp/v2/customer/?_embed';
 const {data, isFetching, error} = useFetch(url).get().json()
