@@ -8,6 +8,7 @@ import { useCartStore } from '../stores/cart';
 const router = useRouter()
 const cart = useCartStore()
 const orderDulu = ref(false)
+
 const clikOrder = ()=>{
   if(cart.total != 0){
     router.push('/customer')

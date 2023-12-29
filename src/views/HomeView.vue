@@ -2,7 +2,7 @@
 import DrinkVue from "../components/icons/Drink.vue";
 import FoodVue from "../components/icons/Food.vue";
 import { animate , stagger} from "motion";
-import { onMounted } from "vue";
+import { onMounted, ref, computed } from "vue";
 onMounted(()=>{
   animate('.title',{
     scale:1.2,
@@ -12,6 +12,8 @@ onMounted(()=>{
     delay: stagger(.6)
   })
 })
+
+
 </script>
 <template>
   <main class="">

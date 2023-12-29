@@ -37,8 +37,8 @@ export const useCartStore = defineStore('cart',()=>{
             }, 500);
         }
     })
-    const persen = computed(()=>{
-       const jumlah = ( total.value / 10 ) *100
+    const persen = computed (()=>{
+       const jumlah = ( total.value / 100 ) * 11
        return jumlah
     })
 

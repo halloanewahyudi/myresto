@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+ 
 const router = createRouter({
+  mode: 'history',
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
@@ -48,7 +49,8 @@ const router = createRouter({
       path: '/orders',
       name: 'orders',
       component: () => import('../views/OrdersView.vue')
-    }
+    },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/404.vue') },
 
   ]
 
