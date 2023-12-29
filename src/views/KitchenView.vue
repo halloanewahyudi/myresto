@@ -2,12 +2,16 @@
 import { useFetch } from "@vueuse/core";
 import { computed, onMounted, ref } from "vue";
 import LoadingVue from "../components/icons/Loading.vue";
-import { useTimestamp } from '@vueuse/core'
+import { useCustomerStore } from "../stores/customer";
+import DoneVue from "../components/Done.vue";
 
-const url = 'https://resto.ardanadutaperkasa.com/wp/wp-json/wp/v2/customer/?_embed';
+const cust = useCustomerStore()
+const acfField = 'status';
+const acfValue = true;
+const baseUrl = 'https://resto.ardanadutaperkasa.com/wp/wp-json/wp/v2/customer';
+const url = `${baseUrl}?filter[${acfField}]=${acfValue}`;
 const { data, isFetching, error } = useFetch(url).get().json()
 const orders = ref([])
-
 const getorder = (order) => {
     for (let index = 0; index < data.length; index++) {
         const element = orders.value[index];
@@ -24,23 +28,22 @@ onMounted(() => {
             <LoadingVue />
         </div>
         <ul v-else class="flex flex-col gap-5">
-            <li v-for="(item) in data" :key="item.id" class="p-4 rounded-lg bg-white flex flex-col gap-4">
-               <span> Nama: <span class="font-semibold">  {{ item.title.rendered }}</span></span> 
-                <div class="flex gap-2 items-center justify-between pb-3 mb-3 border-b">
-                    <span class=""> meja: {{ item.acf.meja }}</span>
-                    <span class=""> hp: {{ item.acf.hp }}</span>
-                </div>
-                <div class="">
-                    <ul class="flex flex-col gap-4 divide-y mb-4">
+            <li v-for="(item) in data" :key="item.id" class="rounded-lg bg-white flex flex-col gap-5 overflow-hidden">
+                <div class="flex flex-col md:flex-row gap-4 items-center justify-center w-full p-5">
+                    <span class="mx-auto md:mx-0 text-4xl shrink-0 rounded-full bg-slate-700 text-white w-16 h-16 flex items-center justify-center">{{ item.acf.meja }}</span>
+                    <ul class="flex flex-col justify-center gap-4  mb-4 w-full">
                         <li v-for="(item, index) in JSON.parse(item.acf.order)" :key="index"
-                            class="flex justify-between items-center gap-3">
-                            <div>{{ item.nama }} </div>
-                            <div> {{ item.banyaknya }} </div>
+                            class="flex justify-between items-center gap-3 font-semibold">
+                            
+                            <div class="shrink-0">{{ item.nama }} </div>
+                            <div class="w-full border-b"></div>
+                            <div class="shrink-0 w-8 h-8 rounded-full bg-slate-700 text-white flex justify-center items-center"> {{ item.banyaknya }} </div>
                         </li>
                     </ul>
                 </div>
-                <div class="flex justify-between">
-                    <span>{{ item.date }}</span>
+                <div class="flex justify-between items-center p-5 bg-slate-700 text-white">
+                    <span> <i class="bi bi-clock-history"></i> {{ cust.formatWaktu(item.date  ) }}</span>
+                    <DoneVue :id="item.id" :title="item.title" :hp="item.hp" :meja="item.meja" :order="item.order"/>
                 </div>
             </li>
         </ul>
