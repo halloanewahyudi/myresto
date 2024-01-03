@@ -1,7 +1,8 @@
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
-
+import { onMounted, ref, watch } from "vue";
+import { useToastStore } from "../stores/toast";
+const toast = useToastStore()
 const props = defineProps({
     id:Number,
     title:String,
@@ -14,12 +15,8 @@ const props = defineProps({
     }
 })
 
-
-
 const done = () =>{
  const url = `https://resto.ardanadutaperkasa.com/wp/wp-json/wp/v2/customer/${props.id}`;
-
-
  const data = {
   title: props.title,
   acf: {
@@ -27,7 +24,8 @@ const done = () =>{
     meja:props.meja,
     order:props.order,
     status:props.status
-  }
+  },
+  'order-status':5,
 };
 
 // Konfigurasi untuk permintaan Axios
@@ -44,8 +42,10 @@ const config = {
 // Melakukan permintaan PUT menggunakan Axios
 axios.put(url, data, config)
   .then(response => {
+    toast.doneAlert('Meja '+ response.data.acf.meja + ' done..!')
     // Handle respons dari server jika permintaan berhasil
     console.log('Sukses:', response.data);
+    
   })
   .catch(error => {
     // Handle kesalahan jika permintaan gagal

@@ -19,6 +19,7 @@ const getData = {
         order: getOrder.value,
         total: cart.total
     },
+    'order-status':4,
     status:'publish'
 }
 const postData = ()=>{
